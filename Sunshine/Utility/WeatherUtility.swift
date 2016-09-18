@@ -40,4 +40,16 @@ class WeatherUtility {
         }
     }
     
+    static func formatString(forData date: Date) -> String {
+        if date.isToday() {
+            return "Today, \(DateFormatter(sunshineStyle: .MonthAndDay).string(from: date))"
+        } else if date.isTomorrow() {
+            return "Tomorrow"
+        } else if date.isThisWeek(){
+            return DateFormatter(sunshineStyle: .Weekday).string(from: date)
+        } else {
+            return DateFormatter(sunshineStyle: .MonthAndDay).string(from: date)
+        }
+    }
+    
 }

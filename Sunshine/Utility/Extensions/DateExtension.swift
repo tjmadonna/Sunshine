@@ -15,4 +15,19 @@ extension Date {
         self.init(timeIntervalSince1970: timeInterval)
     }
     
+    func isToday() -> Bool {
+        return Calendar.current.isDateInToday(self)
+    }
+    
+    func isTomorrow() -> Bool {
+        return Calendar.current.isDateInTomorrow(self)
+    }
+    
+    func isThisWeek() -> Bool {
+        let today = Date()
+        let thisWeek = Calendar.current.date(byAdding: .weekOfYear, value: 1, to: today)
+        
+        return self.compare(today) == .orderedDescending && self.compare(thisWeek!) == .orderedAscending
+    }
+    
 }

@@ -15,8 +15,7 @@ class BaseForecastCell: UICollectionViewCell {
         didSet {
             
             if let date = forecast?.date {
-                let dateFormatter = DateFormatter(sunshineStyle: .MonthAndDay)
-                dateLabel.text = dateFormatter.string(from: date)
+                dateLabel.text = WeatherUtility.formatString(forData: date)
             }
             
             if let highTemp = forecast?.highTemp {

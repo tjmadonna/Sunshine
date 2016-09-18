@@ -17,7 +17,7 @@ extension OpenWeatherClient {
         let parameters: [String: String] = [
             ParameterKeys.CityName: "Pittsburgh",
             ParameterKeys.Format: Constants.JSONFormat,
-            ParameterKeys.NumberOfDays: String(7),
+            ParameterKeys.NumberOfDays: String(14),
             ParameterKeys.Units: Constants.ImperialUnits,
             ]
         

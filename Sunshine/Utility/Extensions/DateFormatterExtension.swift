@@ -12,6 +12,7 @@ extension DateFormatter {
     
     enum SunshineStyle: String {
         case MonthAndDay = "MMMM d"
+        case Weekday = "EEEE"
     }
     
     convenience init(sunshineStyle: DateFormatter.SunshineStyle) {

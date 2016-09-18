@@ -40,6 +40,7 @@ extension OpenWeatherClient {
     
     // MARK: Parameter Keys
     struct ParameterKeys {
+        
         // MARK: General
         static let ApiKey = "appid"
         static let Format = "mode"
@@ -54,32 +55,15 @@ extension OpenWeatherClient {
     struct JSONResponseKeys {
         
         // MARK: Forecast
-        
-        // MARK: General
-        static let StatusMessage = "status_message"
-        static let StatusCode = "status_code"
-        
-        // MARK: Authorization
-        static let RequestToken = "request_token"
-        static let SessionID = "session_id"
-        
-        // MARK: Account
-        static let UserID = "id"
-        
-        // MARK: Config
-        static let ConfigBaseImageURL = "base_url"
-        static let ConfigSecureBaseImageURL = "secure_base_url"
-        static let ConfigImages = "images"
-        static let ConfigPosterSizes = "poster_sizes"
-        static let ConfigProfileSizes = "profile_sizes"
-        
-        // MARK: Movies
-        static let MovieID = "id"
-        static let MovieTitle = "title"
-        static let MoviePosterPath = "poster_path"
-        static let MovieReleaseDate = "release_date"
-        static let MovieReleaseYear = "release_year"
-        static let MovieResults = "results"
+        static let Date = "dt"
+        static let Temperature = "temp"
+        static let HighTemperature = "max"
+        static let LowTemperature = "min"
+        static let Pressure = "pressure"
+        static let Humidity = "humidity"
+        static let Weather = "weather"
+        static let ConditionId = "id"
+        static let ConditionDescription = "main"
         
     }
 }

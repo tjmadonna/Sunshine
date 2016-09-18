@@ -27,11 +27,11 @@ class BaseForecastCell: UICollectionViewCell {
                 lowTempLabel.text = "\(Int(lowTemp))°"
             }
             
-            if let forecastId = forecast?.id, let imageString = WeatherUtility.imageResourceName(forWeatherId: forecastId) {
+            if let forecastId = forecast?.conditionId, let imageString = WeatherUtility.imageResourceName(forWeatherId: forecastId) {
                 forecastImage.image = UIImage(named: imageString)
             }
             
-            if let forecastString = forecast?.detail {
+            if let forecastString = forecast?.conditionDescription {
                 print(forecastString)
                 forecastLabel.text = "\(forecastString)"
             }

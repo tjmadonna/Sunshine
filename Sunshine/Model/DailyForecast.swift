@@ -15,28 +15,28 @@ class DailyForecast: NSObject {
     var lowTemp: Double?
     var pressure: Double?
     var humidity: Int?
-    var id: Int?
-    var detail: String?
+    var conditionId: Int?
+    var conditionDescription: String?
     
     init(dictionary: [String: AnyObject]) {
-        if let dateInt = dictionary["dt"] as? Int {
+        if let dateInt = dictionary[OpenWeatherClient.JSONResponseKeys.Date] as? Int {
             date = Date(timeIntervalSince1970: dateInt)
         }
         
-        if let temp = dictionary["temp"] as? [String: AnyObject] {
-            highTemp = temp["max"] as? Double
-            lowTemp = temp["min"] as? Double
+        if let temp = dictionary[OpenWeatherClient.JSONResponseKeys.Temperature] as? [String: AnyObject] {
+            highTemp = temp[OpenWeatherClient.JSONResponseKeys.HighTemperature] as? Double
+            lowTemp = temp[OpenWeatherClient.JSONResponseKeys.LowTemperature] as? Double
         } else {
-            print("Couldn't find temp")
+            print("Couldn't find temperature")
         }
         
         pressure = dictionary["pressure"] as? Double
         
         humidity = dictionary["humidity"] as? Int
         
-        if let weatherArray = dictionary["weather"] as? [[String: AnyObject]], let weather = weatherArray.first {
-            id = weather["id"] as? Int
-            detail = weather["main"] as? String
+        if let weatherArray = dictionary[OpenWeatherClient.JSONResponseKeys.Weather] as? [[String: AnyObject]], let weather = weatherArray.first {
+            conditionId = weather[OpenWeatherClient.JSONResponseKeys.ConditionId] as? Int
+            conditionDescription = weather[OpenWeatherClient.JSONResponseKeys.ConditionDescription] as? String
         } else {
             print("Couldn't find weather")
         }

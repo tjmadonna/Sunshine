@@ -44,19 +44,14 @@ class DailyForecast: NSObject {
     
     static func dailyForecastsFromResults(results: [[String: AnyObject]]) -> [DailyForecast] {
         
-        var movies = [DailyForecast]()
+        var forecasts = [DailyForecast]()
         
-        // Iterate through array of dictionaries, each Movie is a dictionary
-        var index = 0
+        // Iterate through array of dictionaries, each daily forecast is a dictionary
         for result in results {
-            if index == 0 {
-                print(result)
-                index = index + 1
-            }
-            movies.append(DailyForecast(dictionary: result))
+            forecasts.append(DailyForecast(dictionary: result))
         }
         
-        return movies
+        return forecasts
     }
     
     

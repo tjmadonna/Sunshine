@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B406DA8C1D8F2AE300CCB84D /* SunshineTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B406DA8B1D8F2AE300CCB84D /* SunshineTitleView.swift */; };
 		B4095D831D8A164E0036FF1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4095D821D8A164E0036FF1F /* AppDelegate.swift */; };
 		B4095D8A1D8A164E0036FF1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4095D891D8A164E0036FF1F /* Assets.xcassets */; };
 		B4095D8D1D8A164E0036FF1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4095D8B1D8A164E0036FF1F /* LaunchScreen.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B406DA8B1D8F2AE300CCB84D /* SunshineTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunshineTitleView.swift; sourceTree = "<group>"; };
 		B4095D7F1D8A164E0036FF1F /* Sunshine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sunshine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4095D821D8A164E0036FF1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4095D891D8A164E0036FF1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				B4095D9B1D8A1E910036FF1F /* TodayForecastCell.swift */,
 				B4E782911D8C99010009367C /* ForecastCell.swift */,
 				B4E7829E1D8CD7590009367C /* BaseForecastCell.swift */,
+				B406DA8B1D8F2AE300CCB84D /* SunshineTitleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				B44126C51D8C4D200023F639 /* WeatherUtility.swift in Sources */,
 				B4E7829F1D8CD7590009367C /* BaseForecastCell.swift in Sources */,
 				B4E782921D8C99010009367C /* ForecastCell.swift in Sources */,
+				B406DA8C1D8F2AE300CCB84D /* SunshineTitleView.swift in Sources */,
 				B4E7829B1D8CC02A0009367C /* DailyForecast.swift in Sources */,
 				B4095D9C1D8A1E910036FF1F /* TodayForecastCell.swift in Sources */,
 				B4095D991D8A1D0D0036FF1F /* UIColorExtension.swift in Sources */,

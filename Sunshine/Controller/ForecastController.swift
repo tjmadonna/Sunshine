@@ -16,9 +16,22 @@ class ForecastController: UICollectionViewController, UICollectionViewDelegateFl
     
     let forecastCellId = "forecastCellId";
     
+    let client = OpenWeatherClient()
+    
     override func viewDidLoad() {
+        collectionView!.backgroundColor = .white
         
-        let client = OpenWeatherClient()
+        if let navBarHeight = navigationController?.navigationBar.frame.height {
+            navigationItem.titleView = SunshineTitleView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: navBarHeight))
+        }
+        
+        collectionView!.register(TodayForecastCell.self, forCellWithReuseIdentifier: todayCellId)
+        collectionView!.register(ForecastCell.self, forCellWithReuseIdentifier: forecastCellId)
+        
+        refreshWeather()
+    }
+    
+    private func refreshWeather() {
         client.getForecast { (forecast, error) in
             
             if let forecast = forecast {
@@ -29,11 +42,6 @@ class ForecastController: UICollectionViewController, UICollectionViewDelegateFl
             }
             
         }
-        
-        collectionView!.backgroundColor = .white
-        
-        collectionView!.register(TodayForecastCell.self, forCellWithReuseIdentifier: todayCellId)
-        collectionView!.register(ForecastCell.self, forCellWithReuseIdentifier: forecastCellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

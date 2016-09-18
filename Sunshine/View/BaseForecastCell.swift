@@ -31,7 +31,6 @@ class BaseForecastCell: UICollectionViewCell {
             }
             
             if let forecastString = forecast?.conditionDescription {
-                print(forecastString)
                 forecastLabel.text = "\(forecastString)"
             }
         }

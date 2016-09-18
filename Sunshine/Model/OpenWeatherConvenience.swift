@@ -26,7 +26,6 @@ extension OpenWeatherClient {
             guard error == nil else {
                 performOnMainQueue(updates: {
                     completionHandlerForForecast(nil, error)
-                    
                 })
                 return
             }

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.navigationBar.barTintColor = .sunshineBlue
         navigationController.navigationBar.shadowImage = UIImage()
         navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        
+                
         window?.rootViewController = navigationController
         
         return true

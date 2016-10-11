@@ -10,7 +10,7 @@ import Foundation
 
 class WeatherUtility {
     
-    static func imageResourceName(forWeatherId id: Int) -> String? {
+    static func imageIconResourceName(forWeatherId id: Int) -> String? {
         
         switch id {
         case 200...232:
@@ -38,6 +38,14 @@ class WeatherUtility {
         default:
             return nil
         }
+    }
+    
+    static func imageArtResourceName(forWeatherId id: Int) -> String? {
+        if let resoureName = imageIconResourceName(forWeatherId: id) {
+            return resoureName.appending("Art")
+        }
+        
+        return nil
     }
     
     static func formatString(forData date: Date) -> String {

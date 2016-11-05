@@ -42,6 +42,10 @@ class ForecastDetailView: UIView {
                 pressureLabel.text = "Pressure: \(pressure) hPa"
             }
             
+            if let windSpeed = forecast?.windSpeed, let windDirection = forecast?.windDirection {
+                windLabel.text = "Wind: \(WeatherUtility.formatWindString(forSpeed: windSpeed, direction: windDirection))"
+            }
+            
         }
     }
     
@@ -105,6 +109,13 @@ class ForecastDetailView: UIView {
         return label
     }()
     
+    let windLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 20)
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -123,6 +134,7 @@ class ForecastDetailView: UIView {
         self.addSubview(forecastLabel)
         self.addSubview(humidityLabel)
         self.addSubview(pressureLabel)
+        self.addSubview(windLabel)
         
         // ForecastImage image constraints
         forecastImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
@@ -159,6 +171,12 @@ class ForecastDetailView: UIView {
         pressureLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 8).isActive = true
         pressureLabel.rightAnchor.constraint(equalTo: forecastImage.rightAnchor).isActive = true
         pressureLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        // WindLabel label constraints
+        windLabel.leftAnchor.constraint(equalTo: highTempLabel.leftAnchor).isActive = true
+        windLabel.topAnchor.constraint(equalTo: pressureLabel.bottomAnchor, constant: 8).isActive = true
+        windLabel.rightAnchor.constraint(equalTo: forecastImage.rightAnchor).isActive = true
+        windLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
     }
     

@@ -33,7 +33,7 @@ class OpenWeatherClient : NSObject {
         
         /* 2/3. Build the URL, Configure the request */
         let url = openWeatherURLFromParameters(parameters: parametersWithApiKey, withPathExtension: method)
-        
+
         let task = session.dataTask(with: url) { (data, reponse, error) in
             
             func sendError(error: String) {

@@ -70,4 +70,30 @@ class WeatherUtility {
         }
     }
     
+    static func formatWindString(forSpeed speed: Double, direction: Double) -> String {
+        
+        var directionString: String
+        
+        if (direction >= 337.5 || direction < 22.5) {
+            directionString = "N";
+        } else if (direction >= 22.5 && direction < 67.5) {
+            directionString = "NE";
+        } else if (direction >= 67.5 && direction < 112.5) {
+            directionString = "E";
+        } else if (direction >= 112.5 && direction < 157.5) {
+            directionString = "SE";
+        } else if (direction >= 157.5 && direction < 202.5) {
+            directionString = "S";
+        } else if (direction >= 202.5 && direction < 247.5) {
+            directionString = "SW";
+        } else if (direction >= 247.5 && direction < 292.5) {
+            directionString = "W";
+        } else if (direction >= 292.5 && direction < 337.5) {
+            directionString = "NW";
+        } else {
+            directionString = ""
+        }
+        
+        return String(format: "%.0lf mph %@", speed, directionString)
+    }
 }

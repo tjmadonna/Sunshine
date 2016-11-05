@@ -15,6 +15,8 @@ class DailyForecast: NSObject {
     var lowTemp: Double?
     var pressure: Double?
     var humidity: Int?
+    var windSpeed: Double?
+    var windDirection: Double?
     var conditionId: Int?
     var conditionDescription: String?
     
@@ -33,6 +35,10 @@ class DailyForecast: NSObject {
         pressure = dictionary["pressure"] as? Double
         
         humidity = dictionary["humidity"] as? Int
+        
+        windSpeed = dictionary["speed"] as? Double
+        
+        windDirection = dictionary["deg"] as? Double
         
         if let weatherArray = dictionary[OpenWeatherClient.JSONResponseKeys.Weather] as? [[String: AnyObject]], let weather = weatherArray.first {
             conditionId = weather[OpenWeatherClient.JSONResponseKeys.ConditionId] as? Int

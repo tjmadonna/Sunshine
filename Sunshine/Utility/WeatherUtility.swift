@@ -48,7 +48,7 @@ class WeatherUtility {
         return nil
     }
     
-    static func formatString(forData date: Date) -> String {
+    static func formatString(forDate date: Date) -> String {
         if date.isToday() {
             return "Today, \(DateFormatter(sunshineStyle: .MonthAndDay).string(from: date))"
         } else if date.isTomorrow() {
@@ -57,6 +57,16 @@ class WeatherUtility {
             return DateFormatter(sunshineStyle: .Weekday).string(from: date)
         } else {
             return DateFormatter(sunshineStyle: .MonthAndDay).string(from: date)
+        }
+    }
+    
+    static func formatWeekdayString(forDate date: Date) -> String {
+        if date.isToday() {
+            return "Today"
+        } else if date.isTomorrow() {
+            return "Tomorrow"
+        } else {
+            return DateFormatter(sunshineStyle: .Weekday).string(from: date)
         }
     }
     

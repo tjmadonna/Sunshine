@@ -86,6 +86,16 @@ class ForecastController: UICollectionViewController, UICollectionViewDelegateFl
         return 0
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectedForecast = forecast?[indexPath.row] {
+            let forecastDetailController = ForecastDetailViewController()
+            forecastDetailController.forecast = selectedForecast
+            navigationController?.pushViewController(forecastDetailController, animated: true)
+        } else {
+            createAlert(title: "Forecast Unavailable", message: "Unable to able to retrieve the forecast")
+        }
+    }
+    
     // Create an alert controller to prompt user
     private func createAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

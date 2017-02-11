@@ -47,6 +47,7 @@ extension OpenWeatherClient {
         
         // MARK: Forecast
         static let CityName = "q"
+        static let CityId = "id"
         static let NumberOfDays = "cnt"
         static let Units = "units"
     }

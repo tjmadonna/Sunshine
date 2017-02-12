@@ -18,11 +18,11 @@ struct CoreDataStack {
     private let dbURL: URL
     
     // MARK: - Initializers
-    init?(modelName: String) {
+    init?() {
         
         // Assumes the model is in the main bundle
-        guard let modelURL = Bundle.main.url(forResource: modelName, withExtension: "momd") else {
-            print("Unable to find \(modelName) in the main bundle")
+        guard let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd") else {
+            print("Unable to find Model in the main bundle")
             return nil
         }
         
@@ -41,6 +41,7 @@ struct CoreDataStack {
         
         // create a context and add connect it to the coordinator
         context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.persistentStoreCoordinator = coordinator
         context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         
         // Add a SQLite store located in the documents folder
@@ -58,6 +59,8 @@ struct CoreDataStack {
         } catch{
             print("unable to add store at \(dbURL)")
         }
+        
+        print("finished creating core data")
     }
     
     // MARK: - Utils
@@ -92,4 +95,12 @@ struct CoreDataStack {
         }
     }
     
+    // MARK: - Fetch results
+
+    func fetchLocationRequestWithName(_ ascending: Bool) -> NSFetchRequest<NSFetchRequestResult> {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Location");
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        return request
+    }
+
 }

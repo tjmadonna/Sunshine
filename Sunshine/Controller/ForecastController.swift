@@ -19,29 +19,50 @@ class ForecastController: UICollectionViewController, UICollectionViewDelegateFl
     let client = OpenWeatherClient()
     
     override func viewDidLoad() {
+        
         collectionView!.backgroundColor = .white
         
         if let navBarHeight = navigationController?.navigationBar.frame.height {
             navigationItem.titleView = SunshineTitleView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: navBarHeight))
         }
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "LocationIcon"), style: .plain, target: self, action: #selector(locationClicked))
+        
         collectionView!.register(TodayForecastCell.self, forCellWithReuseIdentifier: todayCellId)
         collectionView!.register(ForecastCell.self, forCellWithReuseIdentifier: forecastCellId)
-        
-        refreshWeather()
+    
     }
     
-    private func refreshWeather() {
-        client.getForecast { (forecast, error) in
-            
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let currentLocationString = UserDefaults.standard.string(forKey: "CurrentLocation"), let currentLocationId = Int(currentLocationString) else {
+            locationClicked()
+            return
+        }
+        
+        refreshWeatherFor(locationId: currentLocationId)
+        
+    }
+    
+    private func refreshWeatherFor(locationId: Int) {
+        
+        client.getForecastFor(cityId: locationId) { (forecast, error) in
             if let forecast = forecast {
                 self.forecast = forecast
                 self.collectionView?.reloadData()
             } else {
                 self.createAlert(title: "An error occured", message: error?.userInfo[NSLocalizedDescriptionKey] as! String)
             }
-            
         }
+        
+    }
+    
+    func locationClicked() {
+        let locationController = LocationController(style: .plain)
+        locationController.modalPresentationStyle = .overFullScreen
+        locationController.modalTransitionStyle = .coverVertical
+        navigationController?.present(locationController, animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

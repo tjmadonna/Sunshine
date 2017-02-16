@@ -35,6 +35,14 @@ class BaseForecastCell: UICollectionViewCell {
             }
         }
     }
+    
+    lazy var locationLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = self.textColor()
+        label.text = "Pittsburgh"
+        label.font = UIFont.systemFont(ofSize: self.dateFontSize())
+        return label
+    }()
 
     lazy var dateLabel: UILabel = {
         let label = UILabel()

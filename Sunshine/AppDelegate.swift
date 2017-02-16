@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    let client = OpenWeatherClient()
+    
     let coreDataStack = CoreDataStack()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -21,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let homeController = ForecastController(collectionViewLayout: UICollectionViewFlowLayout())
+        homeController.client = client
         
         let navigationController = UINavigationController(rootViewController: homeController)
         navigationController.navigationBar.isTranslucent = false

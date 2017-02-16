@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CoreDataTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class CoreDataController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK:  - Properties
     var fetchedResultsController : NSFetchedResultsController<NSFetchRequestResult>? {
@@ -19,16 +19,6 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
             executeSearch()
             tableView.reloadData()
         }
-    }
-    
-    init(fetchedResultsController fc: NSFetchedResultsController<NSFetchRequestResult>,
-         style: UITableViewStyle = .plain){
-        fetchedResultsController = fc
-        super.init(style: style)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
     
     // MARK: - Subclass override methods

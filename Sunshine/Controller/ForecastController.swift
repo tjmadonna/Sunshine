@@ -10,13 +10,15 @@ import UIKit
 
 class ForecastController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var forecast: [DailyForecast]?
-    
     let todayCellId = "todayCellId"
     
     let forecastCellId = "forecastCellId";
     
-    let client = OpenWeatherClient()
+    var client: OpenWeatherClient!
+
+    var city: City?
+    
+    var forecast: [DailyForecast]?
     
     override func viewDidLoad() {
         
@@ -47,8 +49,9 @@ class ForecastController: UICollectionViewController, UICollectionViewDelegateFl
     
     private func refreshWeatherFor(locationId: Int) {
         
-        client.getForecastFor(cityId: locationId) { (forecast, error) in
-            if let forecast = forecast {
+        client.getForecastFor(cityId: locationId) { (city, forecast, error) in
+            if let city = city, let forecast = forecast {
+                self.city = city
                 self.forecast = forecast
                 self.collectionView?.reloadData()
             } else {
@@ -60,9 +63,18 @@ class ForecastController: UICollectionViewController, UICollectionViewDelegateFl
     
     func locationClicked() {
         let locationController = LocationController(style: .plain)
-        locationController.modalPresentationStyle = .overFullScreen
-        locationController.modalTransitionStyle = .coverVertical
-        navigationController?.present(locationController, animated: true)
+        locationController.client = client
+        
+        let locationNav = UINavigationController(rootViewController: locationController)
+        locationNav.modalPresentationStyle = .fullScreen
+        locationNav.modalTransitionStyle = .coverVertical
+        locationNav.navigationBar.isTranslucent = false
+        locationNav.navigationBar.barTintColor = .sunshineBlue
+        locationNav.navigationBar.tintColor = .white
+        locationNav.navigationBar.shadowImage = UIImage()
+        locationNav.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
+        navigationController?.present(locationNav, animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -86,6 +98,7 @@ class ForecastController: UICollectionViewController, UICollectionViewDelegateFl
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BaseForecastCell
         cell.forecast = forecast?[indexPath.item]
+        if cellId == todayCellId { (cell as? TodayForecastCell)?.city = self.city }
         return cell
     }
     
@@ -95,7 +108,7 @@ class ForecastController: UICollectionViewController, UICollectionViewDelegateFl
         
         switch indexPath.item {
         case 0:
-            height = 183
+            height = 226
         default:
             height = 66
         }
@@ -118,10 +131,11 @@ class ForecastController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     // Create an alert controller to prompt user
+    
     private func createAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        
-        self.present(alertController, animated: true, completion: nil)
+                
+        navigationController?.present(alertController, animated: true, completion: nil)
     }
 }

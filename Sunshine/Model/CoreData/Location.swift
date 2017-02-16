@@ -12,12 +12,12 @@ import CoreData
 @objc(Location)
 public class Location: NSManagedObject {
 
-    convenience init?(dictionary: [String: AnyObject], context: NSManagedObjectContext) {
+    convenience init?(city: City, context: NSManagedObjectContext) {
         if let entry = NSEntityDescription.entity(forEntityName: "Location", in: context),
-            let id = dictionary["id"] as? Int64,
-            let name = dictionary["name"] as? String {
+            let id = city.id,
+            let name = city.name {
             self.init(entity: entry, insertInto: context)
-            self.id = id
+            self.id = Int64(id)
             self.name = name
         } else{
             return nil

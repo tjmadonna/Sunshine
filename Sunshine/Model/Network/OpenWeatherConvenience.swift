@@ -12,7 +12,7 @@ import Foundation
 
 extension OpenWeatherClient {
     
-    func getForecastFor(cityName: String, completionHandlerForForecast: @escaping (_ results: [DailyForecast]?, _ error: NSError?) -> Void) {
+    func getForecastFor(cityName: String, completionHandlerForForecast: @escaping (_ location: City?, _ results: [DailyForecast]?, _ error: NSError?) -> Void) {
         
         let parameters: [String: String] = [
             ParameterKeys.CityName: cityName,
@@ -25,28 +25,30 @@ extension OpenWeatherClient {
             
             guard error == nil else {
                 performOnMainQueue(updates: {
-                    completionHandlerForForecast(nil, error)
+                    completionHandlerForForecast(nil, nil, error)
                 })
                 return
             }
             
-            if let result = result as? [String: Any], let forecastDictionary = result["list"] as? [[String: AnyObject]] {
+            if let result = result as? [String: Any], let locationDictionary = result["city"] as? [String : AnyObject], let forecastDictionary = result["list"] as? [[String: AnyObject]] {
+                
+                let location = City(dictionary: locationDictionary)
                 
                 let forecast = DailyForecast.dailyForecastsFromResults(results: forecastDictionary)
                 
                 performOnMainQueue(updates: {
-                    completionHandlerForForecast(forecast, nil)
+                    completionHandlerForForecast(location, forecast, nil)
                 })
                 
             } else {
                 performOnMainQueue(updates: {
-                    completionHandlerForForecast(nil, NSError(domain: "Forecast parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse forecast"]))
+                    completionHandlerForForecast(nil, nil, NSError(domain: "Forecast parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse forecast"]))
                 })
             }
         }
     }
     
-    func getForecastFor(cityId: Int, completionHandlerForForecast: @escaping (_ results: [DailyForecast]?, _ error: NSError?) -> Void) {
+    func getForecastFor(cityId: Int, completionHandlerForForecast: @escaping (_ location: City?, _ results: [DailyForecast]?, _ error: NSError?) -> Void) {
         
         let parameters: [String: String] = [
             ParameterKeys.CityId: String(cityId),
@@ -59,22 +61,24 @@ extension OpenWeatherClient {
             
             guard error == nil else {
                 performOnMainQueue(updates: {
-                    completionHandlerForForecast(nil, error)
+                    completionHandlerForForecast(nil, nil, error)
                 })
                 return
             }
             
-            if let result = result as? [String: Any], let forecastDictionary = result["list"] as? [[String: AnyObject]] {
+            if let result = result as? [String: Any], let locationDictionary = result["city"] as? [String : AnyObject], let forecastDictionary = result["list"] as? [[String: AnyObject]] {
+                
+                let location = City(dictionary: locationDictionary)
                 
                 let forecast = DailyForecast.dailyForecastsFromResults(results: forecastDictionary)
                 
                 performOnMainQueue(updates: {
-                    completionHandlerForForecast(forecast, nil)
+                    completionHandlerForForecast(location, forecast, nil)
                 })
                 
             } else {
                 performOnMainQueue(updates: {
-                    completionHandlerForForecast(nil, NSError(domain: "Forecast parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse forecast"]))
+                    completionHandlerForForecast(nil, nil, NSError(domain: "Forecast parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse forecast"]))
                 })
             }
         }

@@ -55,6 +55,10 @@ extension OpenWeatherClient {
     // MARK: JSON Response Keys
     struct JSONResponseKeys {
         
+        // MARK: City
+        static let CityId = "id"
+        static let CityName = "name"
+        
         // MARK: Forecast
         static let Date = "dt"
         static let Temperature = "temp"
